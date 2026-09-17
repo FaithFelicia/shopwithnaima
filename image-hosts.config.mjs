@@ -18,5 +18,6 @@ export const imageHosts = [
     {
         protocol: 'https',
         hostname: 'img.rocket.new',
-    },
+        { protocol:'https',
+    hostname:'raw.githubusercontent.com',
 ];
