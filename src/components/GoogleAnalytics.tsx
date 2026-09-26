@@ -5,6 +5,9 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+type GoogleAnalyticsWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+};
 
 export default function GoogleAnalytics() {
   const pathname = usePathname();
@@ -12,9 +15,10 @@ export default function GoogleAnalytics() {
 
   useEffect(() => {
     if (!GA_MEASUREMENT_ID || typeof window === 'undefined') return;
-    const url = pathname + (searchParams?.toString() ? `?${searchParams?.toString()}` : '');
-    if (window.gtag) {
-      window.gtag('event', 'page_view', { page_path: url });
+    const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
+    const gtag = (window as GoogleAnalyticsWindow).gtag;
+    if (typeof gtag === 'function') {
+      gtag('event', 'page_view', { page_path: url });
     }
   }, [pathname, searchParams]);
 

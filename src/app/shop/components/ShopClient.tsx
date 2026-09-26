@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { PRODUCTS } from '@/lib/mockData';
+import { useStoreProducts } from '@/lib/useStoreProducts';
 import ProductCard from '@/components/ProductCard';
 import Icon from '@/components/ui/AppIcon';
 
@@ -22,7 +22,7 @@ const PRICE_RANGES = [
 ];
 
 export default function ShopClient() {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams();  const { products } = useStoreProducts();
   const [category, setCategory] = useState('All');
   const [sort, setSort] = useState('newest');
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
@@ -42,7 +42,7 @@ export default function ShopClient() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filtered = useMemo(() => {
-    let result = [...PRODUCTS];
+    let result = [...products];
 
     if (category !== 'All') {
       result = result.filter(p => p.category === category.toLowerCase());
@@ -81,7 +81,7 @@ export default function ShopClient() {
     }
 
     return result;
-  }, [category, sort, selectedSizes, priceRange, searchQuery]);
+  }, [products, category, sort, selectedSizes, priceRange, searchQuery]);
 
   const toggleSize = (s: string) => {
     setSelectedSizes(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
