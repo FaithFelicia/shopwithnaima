@@ -2,12 +2,12 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { PRODUCTS } from '@/lib/mockData';
+import { useStoreProducts } from '@/lib/useStoreProducts';
 import ProductCard from '@/components/ProductCard';
 
-export default function NewArrivalsSection() {
+import { useStoreProducts } from '@/lib/useStoreProducts';
   const sectionRef = useRef<HTMLElement>(null);
-  const newProducts = PRODUCTS?.filter((p) => p?.isNew)?.slice(0, 4);
+  import { useStoreProducts } from '@/lib/useStoreProducts';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
