@@ -81,7 +81,7 @@ export default function ShopClient() {
     }
 
     return result;
-  }, [category, sort, selectedSizes, priceRange, searchQuery]);
+  }, [products, category, sort, selectedSizes, priceRange, searchQuery]);
 
   const toggleSize = (s: string) => {
     setSelectedSizes(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
