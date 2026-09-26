@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  category: 'shoes' | 'clothing' | 'bags' | 'accessories';
+  category: string;
   subcategory: string;
   price: number;
   discountPrice?: number;
